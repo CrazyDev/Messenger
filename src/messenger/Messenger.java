@@ -31,32 +31,12 @@ public class Messenger {
         try {
             client.openConnection();
             System.out.println("Client: Opened connection to server");
-            Thread thread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    while (!close) {
-                        try {
-                            PrintWriter writer = new PrintWriter(client.getSocket().getOutputStream());
-                            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-                            BufferedReader reader2 = new BufferedReader(new InputStreamReader(client.getSocket().getInputStream()));
-                            String line = reader.readLine();
-                            if (line != null) {
-                                writer.println(InetAddress.getLocalHost().getHostName() + ": " +line);
-                                writer.flush();
-                                System.out.println(reader2.readLine());
-                            }
 
-                        } catch (IOException ex) {
-                            Logger.getLogger(Messenger.class.getName()).log(Level.SEVERE, "Erro ao conectar ao servidor...\nServer: " + client.getHost());
-                            Logger.getLogger(Messenger.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                }
-            });
-
+            Thread thread = new Thread(client);
             thread.start();
 
         } catch (IOException ex) {
+            Logger.getLogger(Messenger.class.getName()).log(Level.SEVERE, "Erro ao conectar ao servidor...\nServer: " + client.getHost());
             Logger.getLogger(Messenger.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
