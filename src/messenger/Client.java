@@ -43,7 +43,7 @@ public class Client implements Runnable {
 
     @Override
     public void run() {
-        while (!close) {
+        while (true) {
             try {
                 PrintWriter writer = new PrintWriter(getSocket().getOutputStream());
                 BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
