@@ -5,9 +5,7 @@
  */
 package messenger;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.Socket;
 
 /**
@@ -23,12 +21,16 @@ public class Client {
         this.host = host;
     }
     
+    public String getHost(){
+        return this.host;
+    }
+    
     public Socket getSocket(){
         return this.socket;
     }
 
     public Client openConnection() throws IOException {
-        socket = new Socket("127.0.0.1", 1055);
+        socket = new Socket(host, 1055);
         return this;
     }
     

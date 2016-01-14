@@ -26,7 +26,7 @@ public class Messenger {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Client client = new Client("");
+        Client client = new Client(args[0]);
         System.out.println("Client: Created client");
         try {
             client.openConnection();
@@ -47,6 +47,7 @@ public class Messenger {
                             }
 
                         } catch (IOException ex) {
+                            Logger.getLogger(Messenger.class.getName()).log(Level.SEVERE, "Erro ao conectar ao servidor...\nServer: " + client.getHost());
                             Logger.getLogger(Messenger.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
